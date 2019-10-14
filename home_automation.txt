@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://www.gstatic.com/firebasejs/6.1.0/firebase.js"></script>
+<script type="text/javascript" src="C:\Users\KIIT\Desktop\New folder (6)\final1.js"></script>
+
+<title>Final</title>
+ <script>prompt("Welcome to your home electricity control portal","ID::123456")</script>
+<style>
+.part1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 110%;
+    background: linear-gradient(to bottom, #000066 19%, #33cccc 100%);
+}
+.dev1 {
+position: relative;
+top: 10px;
+left: 10px;
+  background-color: #FFFFFF;
+  width: 300px;
+  border:5px outset aqua;
+  padding: 20px;
+  margin: 10px;
+}
+.dev2 {
+position: absolute;
+top: 139px;
+left: 390px;
+  background-color: #FFFFFF;
+  width: 300px;
+  border:5px outset aqua;
+  padding: 20px;
+  margin: 10px;
+}
+.chart_pie{
+position: absolute;
+top: 139px;
+left: 800px;
+  background-color: #FFFFFF;
+  width: 400px;
+  border:5px outset aqua;
+  padding: 5px;
+  margin: 10px; 
+}
+.chart_bar{
+position: relative;
+top: 17px;
+left: 10px;
+  background-color: #FFFFFF;
+  width: 680px;
+  border:5px outset aqua;
+  padding: 20px;
+  margin: 10px; 
+}
+.temp{
+position: absolute;
+top: 480px;
+left: 800px;
+  background-color: #FFFFFF;
+  width: 150px;
+  border:5px outset aqua;
+  padding: 18px;
+  margin: 10px; 
+}
+.ac{
+position: absolute;
+top: 480px;
+left: 1045px;
+  background-color: #FFFFFF;
+  width: 135px;
+  padding: 16px;
+  border:5px outset aqua;
+  margin: 10px; 
+}
+</style>
+
+</head>
+<body>
+<div class="part1">
+<font face="Bahnschrift Light" color="white">
+<div class="part1">
+<p align="center"><b><i><font size="15">WELCOME &nbsp; USER!</font></i></b></p>
+<p align="right">SUBMIT &nbsp; YOUR &nbsp; FEEDBACK &nbsp; &nbsp; <a href="https://docs.google.com/forms/d/1V38vubyfBqt-LnVkIcgsfAvBLg8m04KLmF1H9XKOQHU/edit"><button>HERE</button></a> &nbsp; &nbsp;</p>
+</font>
+<hr>
+<!-- <script type="text/javascript" src="Final.js"></script> -->
+<!-- DEVICE1 SWITCH -->
+<div class="dev1">
+<center><b>Room1 Light</b><hr>
+<button onclick="submitted()" id="linkit">DEVICE 1</button><br><br>
+STATUS:: &nbsp;<p id="result" style="display: inline; font-weight: bold;"></p></center>
+</div>
+<!-- DEVICE2 SWITCH -->
+<div class="dev2">
+<center><b>Room1 Fan</b><hr>
+<button onclick="submitted2()" id="linkit2">DEVICE 2</button><br><br>
+STATUS:: &nbsp;<p id="result2" style="display: inline; font-weight: bold;"></p></center>
+</div>
+<div class="chart_pie" id="chart_pie">
+<div class="chart_pie" id="chart_pie">
+<!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['LIGHT', 1],
+          ['FAN', 2],
+          ['AC', 1],
+          ['WASTAGE', 1],
+        ]);
+        // Set chart options
+        var options = {'title':'THIS WEEK USAGE',
+                       'width':400,
+                       'height':300};
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_pie'));
+        chart.draw(data, options);
+      }
+    </script>
+</div>
+</div>
+<div class="chart_bar" id="chart_bar">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'ROOM1', 'Guest Room'],
+          ['week1',  23,      33],
+          ['week2',  10,      23],
+          ['week3',  100,      10],
+        ]);
+        var options = {
+        'width':680,
+            'height':260,
+          title : 'Usage Analysis',
+          vAxis: {title: 'Usage'},
+          hAxis: {title: 'Week'},
+          seriesType: 'bars',
+          series: {3: {type: 'line'}}
+        };
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_bar'));
+        chart.draw(data, options);
+      }
+    </script>
+</div>
+<!-- room temp -->
+<div class="temp">
+<center><b>ROOM TEMP</b><hr><h3 id="temp"></h3></p></center>
+<button onclick="popu()" id="linkit">+</button>
+<button onclick="popu1()" id="linkit">-</button><br><br>
+STATUS:: &nbsp;<p id="you"  style="display: inline; font-weight: bold;"></p></center>
+
+</div>
+<!-- guest room AC -->
+<div class="ac">
+<center><b>GUEST ROOM</b><hr>
+<button onclick="ac()" id="linkit3">AC</button><br><br>
+STATUS:: &nbsp;<p id="result3"  style="display: inline; font-weight: bold;"></p></center>
+</div>
+</div>
+</body>
+</html>
